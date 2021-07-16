@@ -28,7 +28,11 @@ install_dependencies:
         - yarn.lock
     paths:
       - node_modules
-
+test:
+ stage: deploy
+ script:
+   - cp -r build /www/test-app/$CI_COMMIT_SHA
+   - ln -fsnv /var/www/test-app/$CI_COMMIT_SHA /www/html
 build_staging:
   extends: install_dependencies
   variables:
